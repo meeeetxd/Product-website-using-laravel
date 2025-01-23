@@ -19,5 +19,5 @@ Route::post('/product/store', [ProductController::class, 'store'])->name('produc
 Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
 Route::put('/product/{id}/update', [ProductController::class, 'update'])->name('products.update');
 Route::get('/product/{id}/delete', [ProductController::class, 'delete'])->name('products.delete');
-Route::get('/product/filter', [ProductController::class, 'filter'])->name('products.filter');
 Route::get('/product/search', [ProductController::class, 'search'])->name('products.search');
+Route::get('/product/filter', [ProductController::class, 'filter'])->name('products.filter');

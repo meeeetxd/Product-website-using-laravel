@@ -24,49 +24,79 @@
 
 
     <div class="container">
-        <form action="get" action="/product/filter" class="d-flex align-items-center mt-3">
-            <div class="me-3">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" value="{{ request('name') }}">
-            </div>
 
 
-            <div class="me-3">
-                <label for="min_price">Min Price:</label>
-                <input type="number" id="min_price" name="min_price" value="{{ request('min_price') }}">
-            </div>
+        <!-- Filter Modal -->
+        <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="filterModalLabel">Filter Products</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/product/filter" method="GET">
+                            <!-- <div class="mb-3">
+                                <label for="name" class="form-label">Name:</label>
+                                <input type="text" id="name" name="name" class="form-control"
+                                    value="{{ request('name') }}">
+                            </div> -->
 
-            <div class="me-3">
-                <label for="max_price">Max Price:</label>
-                <input type="number" id="max_price" name="max_price" value="{{ request('max_price') }}">
-            </div>
+                            <div class="mb-3">
+                                <label for="min_price" class="form-label">Min Price:</label>
+                                <input type="number" id="min_price" name="min_price" class="form-control"
+                                    value="{{ request('min_price') }}">
+                            </div>
 
-            <div class="me-3">
-                <label for="category">Category:</label>
-                <select id="category" name="category">
-                    <option value="">--Select Category--</option>
-                    <option value="Console" {{ request('category') == 'Console' ? 'selected' : '' }}>Console</option>
-                    <option value="PC" {{ request('category') == 'PC' ? 'selected' : '' }}>PC</option>
-                    <option value="Hardware" {{ request('category') == 'Hardware' ? 'selected' : '' }}>Hardware</option>
-                </select>
-            </div>
+                            <div class="mb-3">
+                                <label for="max_price" class="form-label">Max Price:</label>
+                                <input type="number" id="max_price" name="max_price" class="form-control"
+                                    value="{{ request('max_price') }}">
+                            </div>
 
-            <button class="btn btn-dark btn-sm" type="submit">Filter</button>
+                            <div class="mb-3">
+                                <label for="category" class="form-label">Category:</label>
+                                <select id="category" name="category" class="form-select">
+                                    <option value="">--Select Category--</option>
+                                    <option value="Console" {{ request('category') == 'Console' ? 'selected' : '' }}>
+                                        Console</option>
+                                    <option value="PC" {{ request('category') == 'PC' ? 'selected' : '' }}>PC</option>
+                                    <option value="Hardware" {{ request('category') == 'Hardware' ? 'selected' : '' }}>
+                                        Hardware</option>
+                                </select>
+                            </div>
 
-        </form>
-        <div class="mb-3">
-            <form method="GET" action="/product/search" class="d-flex align-items-center mt-3">
-                <div>
-                    Search Products here: <input type="text" name="query" class="form-control"
-                        placeholder="Search products..." value="{{ request('query') }}"><br>
-                    <button type="submit" class="btn btn-primary btn-sm">Search</button>
+                            <div class="mb-3">
+                                <label for="type" class="form-label">Type:</label>
+                                <select id="type" name="type" class="form-select">
+                                    <option value="">--Select Type--</option>
+                                    <option value="Digital Edition" {{ request('type') == 'Digital Edition' ? 'selected' : '' }}>
+                                        Digital Edition</option>
+                                    <option value="Disc Edition" {{ request('type') == 'Disc Edition' ? 'selected' : '' }}>Disc Edition</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-dark btn-sm">Apply Filters</button>
+                        </form>
+                    </div>
                 </div>
+            </div>
+        </div>
+
+
+        <div>
+            <form method="GET" action="/product/search" class="d-flex align-items-center mt-3">
+
+                Search Products here: <input type="text" name="query" class="form-control ms-3"
+                    placeholder="Search products..." value="{{ request('query') }}"><br>
+                <button type="submit" class="btn btn-primary ms-3">Search</button>
+                <button type="button" class="btn btn-primary ms-3" data-bs-toggle="modal" data-bs-target="#filterModal">
+                    Filter
+                </button>
             </form>
         </div>
-        <div>
-            <a href="product/create" class="btn btn-dark mt-3">New Product</a>
-        </div>
-        <h1>Products Available</h1>
+
+        <h1 class="mt-3">Products Available</h1>
 
         <table class="table table-hover table-bordered">
             <thead>
@@ -103,6 +133,9 @@
                 @endforeach
             </tbody>
         </table>
+        <div>
+            <a href="product/create" class="btn btn-dark mt-3">New Product</a>
+        </div>
     </div>
 </body>
 

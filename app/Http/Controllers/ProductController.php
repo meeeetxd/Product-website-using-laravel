@@ -92,25 +92,33 @@ class ProductController extends Controller
     {
         $query = Product::query();
 
-        if ($request->has('name')) {
-            $query->where('name', 'like', '%' . $request->input('name') . '%');
+        // if ($request->has('name')) {
+        //     $query->where('name', 'like', '%' . $request->input('name') . '%');
+        // }
+
+        if ($request->filled('min_price') && $request->filled('max_price')) {
+            // dd("First else");
+            $query->whereBetween('price', [$request->input('min_price'), $request->input('max_price')]);
+        } elseif ($request->filled('min_price')) {
+            // dd("second else");
+            $query->where('price', '>=', $request->input('min_price'));
+        } elseif ($request->filled('max_price')) {
+            // dd("third else");
+            $query->where('price', '<=', $request->input('max_price'));
         }
 
-        if ($request->has('min_price') && $request->has('max_price')) {
-            $query->whereBetween('price', [$request->input('min_price', ), $request->input('max_price')]);
-        }
-
-        if ($request->has('category')) {
+        if ($request->filled('category')) {
             $query->where('category', $request->input('category'));
         }
 
-        if ($request->has('type')) {
+        if ($request->filled('type')) {
             $query->where('type', $request->input('type'));
         }
 
         $products = $query->get();
-
-        return view('product.index', ['products' => $products]);
+        // dd($products);
+        // dd($query->getBindings());
+        return view('products.search', ['products' => $products]);
     }
 
     public function search(Request $request)
@@ -119,6 +127,8 @@ class ProductController extends Controller
 
         $products = Product::where('name', 'like', '%' . $query . '%')
             ->orWhere('description', 'like', '%' . $query . '%')
+            ->orWhere('type', 'like', '%' . $query . '%')
+            ->orWhere('category', 'like', '%' . $query . '%')
             ->get();
 
         return view('products.search', compact('products'));
