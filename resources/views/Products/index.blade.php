@@ -115,7 +115,8 @@
                 @foreach ($products as $product)
 
                     <tr>
-                        <td>{{ $loop->index + 1}}</td>
+                        <td>{{ $loop->iteration + ($products->currentPage() - 1) * $products->perPage() }}</td>
+                        <!-- <td>{{ $loop->index + 1}}</td> -->
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->description }}</td>
                         <td>
@@ -133,6 +134,9 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="d-flex justify-content-center mt-4">
+            {{ $products->links() }}
+        </div>
         <div>
             <a href="product/create" class="btn btn-dark mt-3">New Product</a>
         </div>

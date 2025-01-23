@@ -10,7 +10,8 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::get(); //fetching data from tables
+        $products = Product::simplepaginate(4);
+        // $products = Product::get(); //fetching data from tables
         return view('products.index', ['products' => $products]);
     }
 
