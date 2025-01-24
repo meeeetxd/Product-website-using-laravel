@@ -138,7 +138,7 @@
             {{ $products->links() }}
         </div>
         <div>
-            <a href="product/create" class="btn btn-dark mt-3">New Product</a>
+            <a href="product/create" class="btn btn-dark mt-3 mb-3">New Product</a>
         </div>
     </div>
 </body>

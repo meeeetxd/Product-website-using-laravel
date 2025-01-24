@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::simplepaginate(4);
+        $products = Product::simplepaginate(5);
         // $products = Product::get(); //fetching data from tables
         return view('products.index', ['products' => $products]);
     }
@@ -118,7 +118,6 @@ class ProductController extends Controller
 
         $products = $query->get();
         // dd($products);
-        // dd($query->getBindings());
         return view('products.search', ['products' => $products]);
     }
 

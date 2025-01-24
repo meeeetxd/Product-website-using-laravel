@@ -43,7 +43,7 @@
 
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" name="name" class="form-control" value="{{ old('name', $product->name)}}">
+                        <input type="text" name="name" class="form-control" value="{{ $product->name }}">
 
                         @if ($errors->has('name'))
                             <span class="text-danger">
@@ -55,7 +55,7 @@
                     <div class="form-group">
                         <label>Description</label>
                         <textarea class="form-control" name="description" rows="4"
-                            value="{{ old('description', $product->description) }}"></textarea>
+                            value="{{ $product->description }}"></textarea>
 
                         @if ($errors->has('description'))
                             <span class="text-danger">
@@ -68,8 +68,7 @@
 
                     <div class="form-group">
                         <label>Image</label>
-                        <input type="file" name="image" class="form-control"
-                            value="{{ old('image', $product->image) }}">
+                        <input type="file" name="image" class="form-control" value="{{ $product->image }}">
 
                         @if ($errors->has('image'))
                             <span class="text-danger">
@@ -80,7 +79,7 @@
 
                     <div class="form-group">
                         <label>Price</label>
-                        <input type="text" name="price" class="form-control" value="{{ old('price')}}">
+                        <input type="text" name="price" class="form-control" value="{{ $product->price }}">
 
                         @if ($errors->has('price'))
                             <span class="text-danger">
@@ -91,7 +90,7 @@
 
                     <div class="form-group">
                         <label>Category</label>
-                        <input type="text" name="category" class="form-control" value="{{ old('category')}}">
+                        <input type="text" name="category" class="form-control" value="{{ $product->category }}">
 
                         @if ($errors->has('category'))
                             <span class="text-danger">
@@ -102,7 +101,7 @@
 
                     <div class="form-group">
                         <label>Type</label>
-                        <input type="text" name="type" class="form-control" value="{{ old('type')}}">
+                        <input type="text" name="type" class="form-control" value="{{ $product->type }}">
 
                         @if ($errors->has('type'))
                             <span class="text-danger">
